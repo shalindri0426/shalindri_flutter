@@ -70,6 +70,19 @@ flutter:
     - assets/images/hallway.jpeg
     - assets/images/dining.jpg
     - assets/images/office.jpg
+    - assets/images/other.jpeg
+    - assets/images/sofa1.jpg
+    - assets/images/sofa2.jpeg
+    - assets/images/bookshelf.jpg
+    - assets/images/outdoorSet.jpg
+    - assets/images/officeDesk.jpg
+    - assets/images/diningTable.jpeg
+    - assets/images/bed.jpg
+    - assets/images/wallArt.jpg
+    - assets/images/officeChair.jpg
+    - assets/images/hallwayTable.jpg
+    - assets/images/diningSet.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

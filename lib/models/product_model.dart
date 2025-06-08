@@ -27,7 +27,7 @@ List<ProductModel> luxelivingApp = [
   // product 1
   ProductModel(
     name: "Vienna Sofa",
-    image: "assets/images/livingRoom.jpeg",
+    image: "assets/images/sofa1.jpg",
     rating: 4.3,
     price: 45000,
     review: 23,
@@ -42,7 +42,7 @@ List<ProductModel> luxelivingApp = [
   // product 2
   ProductModel(
     name: "Marble Dining Set",
-    image: "assets/images/diningSet.jpeg",
+    image: "assets/images/diningSet.jpg",
     rating: 4.7,
     price: 62000,
     review: 35,
@@ -57,7 +57,7 @@ List<ProductModel> luxelivingApp = [
   // product 3
   ProductModel(
     name: "Classic Console Table",
-    image: "assets/images/hallwayTable.jpeg",
+    image: "assets/images/hallwayTable.jpg",
     rating: 4.2,
     price: 25000,
     review: 12,
@@ -72,7 +72,7 @@ List<ProductModel> luxelivingApp = [
   // product 4
   ProductModel(
     name: "Ergo Executive Chair",
-    image: "assets/images/officeChair.jpeg",
+    image: "assets/images/officeChair.jpg",
     rating: 4.5,
     price: 38000,
     review: 18,
@@ -87,7 +87,7 @@ List<ProductModel> luxelivingApp = [
   // product 5
   ProductModel(
     name: "Decorative Wall Art Set",
-    image: "assets/images/wallArt.jpeg",
+    image: "assets/images/wallArt.jpg",
     rating: 4.0,
     price: 12000,
     review: 10,
@@ -102,7 +102,7 @@ List<ProductModel> luxelivingApp = [
   // product 6
   ProductModel(
     name: "Oxford King Bed",
-    image: "assets/images/bedroomSet.jpeg",
+    image: "assets/images/bed.jpg",
     rating: 4.8,
     price: 75000,
     review: 29,
@@ -117,7 +117,7 @@ List<ProductModel> luxelivingApp = [
   // product 7
 ProductModel(
   name: "Sienna Fabric Sofa",
-  image: "assets/images/sofa1.jpeg",
+  image: "assets/images/sofa2.jpeg",
   rating: 4.5,
   price: 42000,
   review: 54,
@@ -145,7 +145,7 @@ ProductModel(
 // product 9
 ProductModel(
   name: "Harper Office Desk",
-  image: "assets/images/officeDesk.jpeg",
+  image: "assets/images/officeDesk.jpg",
   rating: 4.3,
   price: 29500,
   review: 21,
@@ -159,7 +159,7 @@ ProductModel(
 // product 10
 ProductModel(
   name: "Aurora Nightstand",
-  image: "assets/images/nightstand.jpeg",
+  image: "assets/images/nightstand.jpg",
   rating: 4.6,
   price: 9500,
   review: 15,
@@ -173,7 +173,7 @@ ProductModel(
 // product 11
 ProductModel(
   name: "Zen Outdoor Chair Set",
-  image: "assets/images/outdoorSet.jpeg",
+  image: "assets/images/outdoorSet.jpg",
   rating: 4.4,
   price: 18000,
   review: 33,
@@ -187,7 +187,7 @@ ProductModel(
 // product 12
 ProductModel(
   name: "Cleo Bookshelf",
-  image: "assets/images/bookshelf.jpeg",
+  image: "assets/images/bookshelf.jpg",
   rating: 4.2,
   price: 16500,
   review: 19,

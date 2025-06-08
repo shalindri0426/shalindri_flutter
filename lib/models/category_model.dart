@@ -9,7 +9,7 @@ List<Category> category = [
   Category(name: "Dining", image: "assets/images/dining.jpg"),
   Category(name: "Hallway", image: "assets/images/hallway.jpeg"),
   Category(name: "Office", image: "assets/images/office.jpg"),
-  Category(name: "Other", image: "assets/images/office.jpg"),
+  Category(name: "Other", image: "assets/images/other.jpeg"),
 ];
 
 List<String> filterCategory = [

@@ -229,73 +229,64 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
 
       // Bottom Buttons
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        backgroundColor: theme.colorScheme.background,
-        elevation: 0,
-        label: SizedBox(
-          width: size.width * 0.9,
-          child: Row(
-            children: [
-              // ADD TO CART
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Item added to cart!"),
-                        duration: Duration(seconds: 2),
-                        backgroundColor: Colors.greenAccent,
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.colorScheme.background,
-                    elevation: 0,
-                    side: BorderSide(color: theme.colorScheme.onBackground),
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.shopping_cart, color: theme.colorScheme.onBackground),
-                        const SizedBox(width: 5),
-                        Text("ADD TO CART", style: GoogleFonts.poppins(color: theme.colorScheme.onBackground)),
-                      ],
-                    ),
-                  ),
-                ),
+      bottomNavigationBar: Padding(
+  padding: const EdgeInsets.fromLTRB(18, 0, 18, 20),
+  child: Row(
+    children: [
+      Expanded(
+        child: ElevatedButton.icon(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Item added to cart!"),
+                duration: Duration(seconds: 2),
+                backgroundColor: Colors.greenAccent,
               ),
-              const SizedBox(width: 10),
-
-              // BUY NOW
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const PlaceOrderForm()),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    color: theme.colorScheme.onBackground,
-                    child: Center(
-                      child: Text(
-                        "BUY NOW",
-                        style: GoogleFonts.poppins(color: theme.colorScheme.background, letterSpacing: 1),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            );
+          },
+          icon: Icon(Icons.shopping_cart, color: theme.colorScheme.onBackground),
+          label: Text(
+            "ADD TO CART",
+            style: GoogleFonts.poppins(
+              color: theme.colorScheme.onBackground,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: theme.colorScheme.background,
+            elevation: 0,
+            side: BorderSide(color: theme.colorScheme.onBackground),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           ),
         ),
       ),
+      const SizedBox(width: 10),
+      Expanded(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PlaceOrderForm()),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: theme.colorScheme.onBackground,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          ),
+          child: Text(
+            "BUY NOW",
+            style: GoogleFonts.poppins(
+              color: theme.colorScheme.background,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
     );
   }
 }

@@ -13,45 +13,47 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Greeting Box
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Hello,", style: GoogleFonts.poppins(color: textColor)),
-                  const SizedBox(height: 4),
-                  Text(
-                    "FULL NAME",
-                    style: GoogleFonts.poppins(
-                      color: textColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Greeting Box
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hello,", style: GoogleFonts.poppins(color: textColor)),
+                    const SizedBox(height: 4),
+                    Text(
+                      "FULL NAME",
+                      style: GoogleFonts.poppins(
+                        color: textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            // Menu Items
-            _buildMenuItem(Icons.person_outline, "Update Profile", textColor, backgroundColor, borderColor,),
-            _buildMenuItem(Icons.history, "Order History", textColor, backgroundColor, borderColor),
-            _buildMenuItem(Icons.favorite_border, "My Wishlist", textColor, backgroundColor, borderColor),
-            _buildMenuItem(Icons.location_on_outlined, "Manage Address", textColor, backgroundColor, borderColor),
-            _buildMenuItem(Icons.logout, "Logout", textColor, backgroundColor, null),
-          ],
+              // Menu Items
+              _buildMenuItem(Icons.person_outline, "Update Profile", textColor, backgroundColor, borderColor),
+              _buildMenuItem(Icons.history, "Order History", textColor, backgroundColor, borderColor),
+              _buildMenuItem(Icons.favorite_border, "My Wishlist", textColor, backgroundColor, borderColor),
+              _buildMenuItem(Icons.location_on_outlined, "Manage Address", textColor, backgroundColor, borderColor),
+              _buildMenuItem(Icons.logout, "Logout", textColor, backgroundColor, null),
+            ],
+          ),
         ),
       ),
     );
@@ -65,9 +67,11 @@ class ProfileScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(10),
-        border: borderColor != null ? Border(
-          bottom: BorderSide(color: borderColor, width: 0.5),
-        ) : null,
+        border: borderColor != null
+            ? Border(
+                bottom: BorderSide(color: borderColor, width: 0.5),
+              )
+            : null,
       ),
       child: Row(
         children: [
