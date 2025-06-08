@@ -69,8 +69,8 @@ class _MainAppscreenState extends State<MainAppscreen> {
         },
         elevation: 0,
         backgroundColor: Colors.white,
-        unselectedItemColor: Colors.pink,
-        selectedItemColor: Colors.yellow,
+        unselectedItemColor: const Color.fromARGB(255, 30, 67, 32),
+        selectedItemColor: const Color.fromARGB(255, 52, 41, 175),
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
