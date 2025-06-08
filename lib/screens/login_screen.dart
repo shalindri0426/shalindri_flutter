@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/register_screen.dart';
 import 'package:luxe_living/screens/main_appscreen.dart';
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Logo or Title
                 Text(
                   'LUXE – LIVING',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: primaryColor,
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) =>
                       value != null && value.contains('@') ? null : 'Enter a valid email',
-                  style: TextStyle(color: primaryColor),
+                  style: GoogleFonts.poppins(color: primaryColor),
                 ),
                 const SizedBox(height: 20),
 
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                   validator: (value) =>
                       value != null && value.length >= 6 ? null : 'Password must be 6+ chars',
-                  style: TextStyle(color: primaryColor),
+                  style: GoogleFonts.poppins(color: primaryColor),
                 ),
                 const SizedBox(height: 30),
 
@@ -107,9 +108,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       foregroundColor: onPrimaryColor,
                     ),
-                    child: const Text(
+                    child: Text(
                       'Login',
-                      style: TextStyle(fontSize: 16),
+                      style: GoogleFonts.poppins(fontSize: 16),
                     ),
                   ),
                 ),
@@ -126,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: Text(
                     "Don't have an account? Register",
-                    style: TextStyle(color: secondaryColor),
+                    style: GoogleFonts.poppins(color: secondaryColor),
                   ),
                 ),
               ],

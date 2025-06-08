@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -28,11 +29,11 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Hello,", style: TextStyle(color: textColor)),
+                  Text("Hello,", style: GoogleFonts.poppins(color: textColor)),
                   const SizedBox(height: 4),
                   Text(
                     "FULL NAME",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: textColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -45,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Menu Items
-            _buildMenuItem(Icons.person_outline, "Update Profile", textColor, backgroundColor, borderColor),
+            _buildMenuItem(Icons.person_outline, "Update Profile", textColor, backgroundColor, borderColor,),
             _buildMenuItem(Icons.history, "Order History", textColor, backgroundColor, borderColor),
             _buildMenuItem(Icons.favorite_border, "My Wishlist", textColor, backgroundColor, borderColor),
             _buildMenuItem(Icons.location_on_outlined, "Manage Address", textColor, backgroundColor, borderColor),
@@ -74,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(width: 16),
           Text(
             title.toUpperCase(),
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: textColor,
               fontWeight: FontWeight.w500,
               letterSpacing: 1,

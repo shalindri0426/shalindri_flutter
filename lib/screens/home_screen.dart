@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/category_model.dart';
 import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/screens/category_products.dart';
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     "Shop by category",
-                    style: textTheme.titleMedium?.copyWith(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       color: colorScheme.primary,
                       letterSpacing: 1,
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style: textTheme.bodyMedium?.copyWith(
+                    style:GoogleFonts.poppins(
                       color: colorScheme.secondary,
                     ),
                   ),
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     "Trending Now",
-                    style: textTheme.titleMedium?.copyWith(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       color: colorScheme.primary,
                       letterSpacing: 1,
@@ -114,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style: textTheme.bodyMedium?.copyWith(
+                    style: GoogleFonts.poppins(
                       color: colorScheme.secondary,
                     ),
                   ),
@@ -161,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     "Recently Viewed",
-                    style: textTheme.titleMedium?.copyWith(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       color: colorScheme.primary,
                       letterSpacing: 1,
@@ -169,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style: textTheme.bodyMedium?.copyWith(
+                    style: GoogleFonts.poppins(
                       color: colorScheme.secondary,
                     ),
                   ),

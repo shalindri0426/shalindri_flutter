@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'login_screen.dart'; // Import your login page
 
 class RegisterPage extends StatefulWidget {
@@ -110,9 +111,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Register',
-                    style: TextStyle(fontSize: 16),
+                    style: GoogleFonts.poppins(fontSize: 16),
                   ),
                 ),
               ),
@@ -126,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: Text(
                   'Already have an account? Login',
-                  style: TextStyle(color: secondaryColor),
+                  style: GoogleFonts.poppins(color: secondaryColor),
                 ),
               ),
             ],
@@ -149,14 +150,14 @@ class _RegisterPageState extends State<RegisterPage> {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: secondaryColor),
+        labelStyle: GoogleFonts.poppins(color: secondaryColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         filled: true,
         fillColor: theme.cardColor.withOpacity(0.15),
       ),
-      style: TextStyle(color:theme.colorScheme.primary ),
+      style: GoogleFonts.poppins(color:theme.colorScheme.primary ),
       validator: validator,
     );
   }

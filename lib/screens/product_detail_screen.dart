@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/screens/placeOrder_screen.dart';
@@ -27,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         backgroundColor: theme.colorScheme.background,
         title: Text(
           "Product Detail",
-          style: theme.textTheme.titleLarge,
+          style: GoogleFonts.poppins(),
         ),
         actions: [
           Stack(
@@ -45,7 +46,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   child: const Text(
                     "3",
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style:TextStyle(
+                      color: Colors.white, 
+                      fontWeight: FontWeight.bold,
+                      ),
                   ),
                 ),
               ),
@@ -108,12 +112,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 Text(
                   "LKR ${widget.ProductItem.price}",
-                  style: TextStyle(color: theme.colorScheme.secondary),
+                  style: GoogleFonts.poppins(color: theme.colorScheme.secondary),
                 ),
                 if (widget.ProductItem.ischeck == true)
                   Text(
                     "LKR ${widget.ProductItem.price + 200}.00",
-                    style: const TextStyle(
+                    style:  GoogleFonts.poppins(
                       color: Colors.pink,
                       fontSize: 12,
                       decoration: TextDecoration.lineThrough,
@@ -199,7 +203,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     child: Center(
                                       child: Text(
                                         material,
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           color: isSelected
                                               ? theme.colorScheme.background
                                               : theme.colorScheme.onBackground,
@@ -259,7 +263,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Icon(Icons.shopping_cart, color: theme.colorScheme.onBackground),
                         const SizedBox(width: 5),
-                        Text("ADD TO CART", style: TextStyle(color: theme.colorScheme.onBackground)),
+                        Text("ADD TO CART", style: GoogleFonts.poppins(color: theme.colorScheme.onBackground)),
                       ],
                     ),
                   ),
@@ -282,7 +286,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: Center(
                       child: Text(
                         "BUY NOW",
-                        style: TextStyle(color: theme.colorScheme.background, letterSpacing: 1),
+                        style: GoogleFonts.poppins(color: theme.colorScheme.background, letterSpacing: 1),
                       ),
                     ),
                   ),

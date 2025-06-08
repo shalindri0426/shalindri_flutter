@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/models/category_model.dart';
 import 'package:luxe_living/models/subcategory_model.dart';
@@ -145,7 +146,7 @@ class CategoryProducts extends StatelessWidget {
                       ? Center(
                         child: Text(
                           "No items available in this category.",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 20,
                             color: Colors.red[300],
                           ),
@@ -213,7 +214,7 @@ class CategoryProducts extends StatelessWidget {
                                   padding: const EdgeInsets.fromLTRB(12, 0, 0, 2),
                                   child: Text(
                                     "LKR ${productItem.price.toString()}",
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: Colors.green.shade600,
                                     ),
                                   ),
@@ -223,7 +224,7 @@ class CategoryProducts extends StatelessWidget {
                                     padding: const EdgeInsets.fromLTRB(12, 0, 0, 2),
                                     child: Text(
                                       "LKR ${productItem.price + 200}.00",
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         color: Colors.pink,
                                         fontSize: 12,
                                         decoration: TextDecoration.lineThrough,

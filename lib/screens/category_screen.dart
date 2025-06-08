@@ -5,6 +5,10 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final backgroundColor = theme.primaryColor;
+    final textColor = theme.scaffoldBackgroundColor;
+
     final List<Map<String, String>> categories = [
       {'title': 'Sofas', 'image': '🛋️'},
       {'title': 'Beds', 'image': '🛏️'},
@@ -28,10 +32,9 @@ class CategoryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Categories',
-        style: TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
-        ),),
+        foregroundColor: textColor,
+        backgroundColor: backgroundColor,
+        title: const Text('Product Categories'),
         centerTitle: true,
       ),
       body: Padding(
@@ -42,15 +45,16 @@ class CategoryScreen extends StatelessWidget {
               Wrap(
                 spacing: 10,
                 runSpacing: 10,
-                children: categories.map((category) {
-                  return _buildCategoryCard(
-                    title: category['title']!,
-                    emoji: category['image']!,
-                    onTap: () {
-                      // Navigate or filter products
-                    },
-                  );
-                }).toList(),
+                children:
+                    categories.map((category) {
+                      return _buildCategoryCard(
+                        title: category['title']!,
+                        emoji: category['image']!,
+                        onTap: () {
+                          // Navigate or filter products
+                        },
+                      );
+                    }).toList(),
               ),
             ],
           ),

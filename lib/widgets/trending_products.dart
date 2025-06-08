@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart'; // Import ProductModel
 
 class TrendingProducts extends StatelessWidget {
@@ -47,17 +48,17 @@ class TrendingProducts extends StatelessWidget {
           productItem.name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
         Text(
           "LKR ${productItem.price.toString()}",
-          style: TextStyle(color: Colors.green),
+          style: GoogleFonts.poppins(color: Colors.green),
         ),
         const SizedBox(width: 5),
         if (productItem.ischeck == true)
           Text(
             "LKR ${productItem.price + 200}.00",
-            style: const TextStyle(
+            style:  GoogleFonts.poppins(
               color: Colors.pink,
               fontSize: 12,
               decoration: TextDecoration.lineThrough,
