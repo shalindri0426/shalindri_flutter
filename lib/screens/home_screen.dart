@@ -25,11 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
-
             // Banner image
             Image.asset("assets/images/mainbanner.png"),
-
             const SizedBox(height: 20),
 
             // Section: Shop by category
