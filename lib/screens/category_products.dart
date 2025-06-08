@@ -16,6 +16,8 @@ class CategoryProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     // Filter subcategories based on the main category
     final filteredSubcategories = subcategory
@@ -23,13 +25,13 @@ class CategoryProducts extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(category),
-        backgroundColor: Colors.grey.shade300,
+        title: Text(category, style: theme.textTheme.bodyLarge),
+        backgroundColor: theme.appBarTheme.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: Icon(Icons.arrow_back_ios_new, color: colorScheme.onPrimary),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -45,13 +47,10 @@ class CategoryProducts extends StatelessWidget {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(5),
                     hintText: "$category Furnitures",
-                    hintStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 13,
-                    ),
+                    hintStyle: theme.textTheme.bodySmall,
                     filled: true,
-                    fillColor: Colors.grey.shade200,
-                    prefixIcon: const Icon(Icons.search, color: Colors.black),
+                    fillColor: theme.cardColor,
+                    prefixIcon: Icon(Icons.search, color: colorScheme.onSecondary),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8),
@@ -73,20 +72,20 @@ class CategoryProducts extends StatelessWidget {
                     (index) => Padding(
                       padding: const EdgeInsets.only(right: 5),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(color: colorScheme.onSecondary),
                         ),
                         child: Row(
                           children: [
-                            Text(filterCategory[index],
-                                style: const TextStyle(fontSize: 12)),
+                            Text(filterCategory[index], style: theme.textTheme.bodySmall),
                             const SizedBox(width: 5),
-                            index == 0
-                                ? const Icon(Icons.filter_list, size: 15)
-                                : const Icon(Icons.keyboard_arrow_down, size: 15),
+                            Icon(
+                              index == 0 ? Icons.filter_list : Icons.keyboard_arrow_down,
+                              size: 15,
+                              color: colorScheme.onSecondary,
+                            ),
                           ],
                         ),
                       ),
@@ -112,8 +111,9 @@ class CategoryProducts extends StatelessWidget {
                         // TODO: Handle subcategory tap
                       },
                       child: Chip(
-                        label: Text(filteredSubcategories[index].name),
-                        backgroundColor: Colors.grey.shade200,
+                        label: Text(filteredSubcategories[index].name,
+                            style: theme.textTheme.bodySmall),
+                        backgroundColor: theme.cardColor,
                       ),
                     ),
                   );
@@ -126,17 +126,16 @@ class CategoryProducts extends StatelessWidget {
             // Products Grid
             Expanded(
               child: categoryProducts.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         "No items available in this category.",
-                        style: TextStyle(fontSize: 20, color: Colors.red),
+                        style: TextStyle(fontSize: 20, color: Colors.red[300]),
                       ),
                     )
                   : GridView.builder(
                       itemCount: categoryProducts.length,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
@@ -156,20 +155,20 @@ class CategoryProducts extends StatelessWidget {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Colors.grey.shade200,
+                                  color: theme.cardColor,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(productItem.image),
                                   ),
                                 ),
-                                child: const Align(
+                                child: Align(
                                   alignment: Alignment.topRight,
                                   child: Padding(
-                                    padding: EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(8),
                                     child: CircleAvatar(
                                       radius: 16,
-                                      backgroundColor: Colors.grey,
-                                      child: Icon(
+                                      backgroundColor: colorScheme.primary.withOpacity(0.7),
+                                      child: const Icon(
                                         Icons.favorite_border,
                                         color: Colors.white,
                                         size: 16,
@@ -183,13 +182,13 @@ class CategoryProducts extends StatelessWidget {
                                 productItem.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
+                                style: theme.textTheme.bodyMedium!.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 "LKR ${productItem.price.toString()}",
-                                style: const TextStyle(color: Colors.green),
+                                style: TextStyle(color: Colors.green.shade600),
                               ),
                               if (productItem.ischeck == true)
                                 Text(

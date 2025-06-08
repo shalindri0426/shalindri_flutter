@@ -20,18 +20,25 @@ class _MainAppscreenState extends State<MainAppscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: theme.appBarTheme.backgroundColor,
         elevation: 0,
-        title: Image.asset("assets/images/logo.png", height: 40),
+        title: Image.asset(
+          Theme.of(context).brightness ==Brightness.dark
+          ? "assets/images/logo.png"
+          : "assets/images/logoWhite.png", 
+          height: 50),
         actions: [
           Stack(
             clipBehavior: Clip.none,
             children: [
               IconButton(
-                icon: const Icon(Icons.shopping_cart, color: Colors.black),
+                icon: Icon(Icons.shopping_cart, color: colorScheme.onPrimary),
                 onPressed: () {
                   // Add cart navigation logic here
                 },
@@ -68,9 +75,8 @@ class _MainAppscreenState extends State<MainAppscreen> {
           });
         },
         elevation: 0,
-        backgroundColor: Colors.white,
-        unselectedItemColor: const Color.fromARGB(255, 30, 67, 32),
-        selectedItemColor: const Color.fromARGB(255, 52, 41, 175),
+        selectedItemColor: colorScheme.primary,
+        unselectedItemColor: colorScheme.secondary,
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

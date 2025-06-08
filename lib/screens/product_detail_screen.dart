@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart';
-import 'package:luxe_living/widgets/trending_products.dart';
 import 'package:luxe_living/screens/placeOrder_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -19,54 +18,50 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
-        title: const Text("Product Detail"),
+        backgroundColor: theme.colorScheme.background,
+        title: Text(
+          "Product Detail",
+          style: theme.textTheme.titleLarge,
+        ),
         actions: [
           Stack(
             clipBehavior: Clip.none,
             children: [
-              Icon(Icons.shopping_cart, size: 28),
+              Icon(Icons.shopping_cart, size: 28, color: theme.iconTheme.color),
               Positioned(
                 right: -3,
                 top: -5,
                 child: Container(
-                  padding: EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: theme.colorScheme.error,
                     shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: Text(
-                      "3",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  child: const Text(
+                    "3",
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
         ],
       ),
       body: ListView(
         children: [
           Container(
-            color: const Color.fromARGB(255, 246, 208, 253),
+            color: theme.colorScheme.surfaceVariant,
             height: size.height * 0.46,
             width: size.width,
             child: PageView.builder(
-              onPageChanged: (value) {
-                setState(() {
-                  currentIndex = value;
-                });
-              },
+              onPageChanged: (value) => setState(() => currentIndex = value),
               itemCount: 3,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
@@ -78,22 +73,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       width: size.width * 0.85,
                       fit: BoxFit.cover,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         3,
                         (index) => AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          margin: EdgeInsets.only(right: 4),
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.only(right: 4),
                           width: 7,
                           height: 7,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color:
-                                index == currentIndex
-                                    ? Colors.blue
-                                    : Colors.grey,
+                            color: index == currentIndex
+                                ? theme.colorScheme.primary
+                                : Colors.grey,
                           ),
                         ),
                       ),
@@ -104,20 +98,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(18),
+            padding: const EdgeInsets.all(18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.ProductItem.name,
-                  maxLines: 1,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "LKR ${widget.ProductItem.price.toString()}",
-                  style: TextStyle(color: Colors.green),
+                  "LKR ${widget.ProductItem.price}",
+                  style: TextStyle(color: theme.colorScheme.secondary),
                 ),
-                const SizedBox(width: 5),
                 if (widget.ProductItem.ischeck == true)
                   Text(
                     "LKR ${widget.ProductItem.price + 200}.00",
@@ -125,17 +117,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       color: Colors.pink,
                       fontSize: 12,
                       decoration: TextDecoration.lineThrough,
-                      decorationColor: Colors.grey,
                     ),
                   ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Text(
-                  "${widget.ProductItem.description}",
-                  style: TextStyle(fontSize: 14),
+                  widget.ProductItem.description,
+                  style: theme.textTheme.bodyMedium,
                 ),
-
-                //for colour
                 const SizedBox(height: 20),
+
+                // Color Selector
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -144,123 +135,82 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Colour",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          Text("Colour", style: theme.textTheme.bodyLarge),
                           const SizedBox(height: 10),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children:
-                                  widget.ProductItem.pcolor.asMap().entries.map(
-                                    (entry) {
-                                      final int index = entry.key;
-                                      final color = entry.value;
-                                      return GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            selectedColorIndex = index;
-                                          });
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.only(right: 10),
-                                          child: CircleAvatar(
-                                            radius: 18,
-                                            backgroundColor: color,
-                                            child:
-                                                selectedColorIndex == index
-                                                    ? Icon(
-                                                      Icons.check,
-                                                      color: Colors.white,
-                                                      size: 18,
-                                                    )
-                                                    : null,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).toList(),
+                              children: widget.ProductItem.pcolor.asMap().entries.map((entry) {
+                                final int index = entry.key;
+                                final color = entry.value;
+                                return GestureDetector(
+                                  onTap: () => setState(() => selectedColorIndex = index),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: CircleAvatar(
+                                      radius: 18,
+                                      backgroundColor: color,
+                                      child: selectedColorIndex == index
+                                          ? const Icon(Icons.check, color: Colors.white, size: 18)
+                                          : null,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
                         ],
                       ),
                     ),
 
-                    // For material
+                    // Material Selector
                     SizedBox(
                       width: size.width / 2.4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Material",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          Text("Material", style: theme.textTheme.bodyLarge),
                           const SizedBox(height: 10),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children:
-                                  widget.ProductItem.material
-                                      .asMap()
-                                      .entries
-                                      .map((entry) {
-                                        final int index = entry.key;
-                                        final String material = entry.value;
-                                        return GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              selectedSizeIndex = index;
-                                            });
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 35,
-                                            width: 60,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  selectedSizeIndex == index
-                                                      ? Colors.black
-                                                      : Colors.white,
-                                              border: Border.all(
-                                                color:
-                                                    selectedSizeIndex == index
-                                                        ? Colors.black
-                                                        : const Color.fromARGB(
-                                                          95,
-                                                          0,
-                                                          0,
-                                                          0,
-                                                        ),
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                material,
-                                                style: TextStyle(
-                                                  color:
-                                                      selectedSizeIndex == index
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 10,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      })
-                                      .toList(),
+                              children: widget.ProductItem.material.asMap().entries.map((entry) {
+                                final int index = entry.key;
+                                final material = entry.value;
+                                final isSelected = selectedSizeIndex == index;
+                                return GestureDetector(
+                                  onTap: () => setState(() => selectedSizeIndex = index),
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    height: 35,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      color: isSelected
+                                          ? theme.colorScheme.onBackground
+                                          : theme.colorScheme.background,
+                                      border: Border.all(
+                                        color: isSelected
+                                            ? theme.colorScheme.onBackground
+                                            : Colors.grey,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        material,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? theme.colorScheme.background
+                                              : theme.colorScheme.onBackground,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
                         ],
@@ -274,16 +224,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ],
       ),
 
+      // Bottom Buttons
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.background,
         elevation: 0,
         label: SizedBox(
           width: size.width * 0.9,
           child: Row(
-            //add tocart
             children: [
+              // ADD TO CART
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
@@ -296,27 +247,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: theme.colorScheme.background,
                     elevation: 0,
-                    side: BorderSide(color: Colors.black),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
+                    side: BorderSide(color: theme.colorScheme.onBackground),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.shopping_cart, color: Colors.black),
-                        SizedBox(width: 5),
-                        Text(
-                          "ADD TO CART",
-                          style: TextStyle(
-                            color: Colors.black,
-                            letterSpacing: 1,
-                          ),
-                        ),
+                        Icon(Icons.shopping_cart, color: theme.colorScheme.onBackground),
+                        const SizedBox(width: 5),
+                        Text("ADD TO CART", style: TextStyle(color: theme.colorScheme.onBackground)),
                       ],
                     ),
                   ),
@@ -324,28 +267,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
               const SizedBox(width: 10),
 
-              //buy now button
+              // BUY NOW
               Expanded(
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const PlaceOrderForm(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const PlaceOrderForm()),
                     );
                   },
-
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    color: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    color: theme.colorScheme.onBackground,
                     child: Center(
                       child: Text(
                         "BUY NOW",
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          letterSpacing: 1,
-                        ),
+                        style: TextStyle(color: theme.colorScheme.background, letterSpacing: 1),
                       ),
                     ),
                   ),

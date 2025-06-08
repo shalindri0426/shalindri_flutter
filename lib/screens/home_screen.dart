@@ -15,112 +15,110 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.background,
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 50),
-
-            SizedBox(height: 20),
 
             // Banner image
             Image.asset("assets/images/mainbanner.png"),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            const SizedBox(height: 20),
+
+            // Section: Shop by category
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Shop by category",
-                    style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 1,
-                      color: Colors.deepOrange,
+                    style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                      letterSpacing: 1,
                     ),
                   ),
                   Text(
                     "See all",
-                    style: TextStyle(
-                      fontSize: 14,
-                      letterSpacing: 0,
-                      color: Colors.blueGrey,
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.secondary,
                     ),
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 10),
-
             // Categories
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                children: List.generate(
-                  category.length,
-                  (index) => InkWell(
+                children: List.generate(category.length, (index) {
+                  final currentCategory = category[index];
+                  return InkWell(
                     onTap: () {
-                      final filterItems = luxelivingApp
-                          .where((item) =>
-                              item.category.toLowerCase() ==
-                              category[index].name.toLowerCase())
-                          .toList();
+                      final filtered = luxelivingApp.where((item) =>
+                        item.category.toLowerCase() == currentCategory.name.toLowerCase()).toList();
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => CategoryProducts(
-                            category: category[index].name,
-                            categoryProducts: filterItems,
+                            category: currentCategory.name,
+                            categoryProducts: filtered,
                           ),
                         ),
                       );
                     },
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: CircleAvatar(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
                             radius: 30,
-                            backgroundImage: AssetImage(
-                              category[index].image,
-                            ),
+                            backgroundImage: AssetImage(currentCategory.image),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(category[index].name),
-                      ],
+                          const SizedBox(height: 10),
+                          Text(
+                            currentCategory.name,
+                            style: textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            // Section: Trending Now
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Trending Now",
-                    style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 1,
-                      color: Colors.deepOrange,
+                    style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                      letterSpacing: 1,
                     ),
                   ),
                   Text(
                     "See all",
-                    style: TextStyle(
-                      fontSize: 14,
-                      letterSpacing: 0,
-                      color: Colors.blueGrey,
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.secondary,
                     ),
                   ),
                 ],
@@ -130,26 +128,25 @@ class _HomeScreenState extends State<HomeScreen> {
             // Trending products
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: List.generate(luxelivingApp.length, (index) {
-                  final productItems = luxelivingApp[index];
+                  final product = luxelivingApp[index];
                   return Padding(
-                    padding: index == 0
-                        ? const EdgeInsets.symmetric(horizontal: 20)
-                        : const EdgeInsets.only(right: 20),
+                    padding: const EdgeInsets.only(right: 20),
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => ProductDetailScreen(
-                              ProductItem: productItems,
+                              ProductItem: product,
                             ),
                           ),
                         );
                       },
                       child: TrendingProducts(
-                        productItem: productItems,
+                        productItem: product,
                         size: size,
                       ),
                     ),
@@ -157,6 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
               ),
             ),
+
+            const SizedBox(height: 30),
           ],
         ),
       ),
