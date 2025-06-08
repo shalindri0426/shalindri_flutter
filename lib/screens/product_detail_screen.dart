@@ -25,7 +25,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.primaryColor,
+        foregroundColor: theme.colorScheme.background,
         title: Text(
           "Product Detail",
           style: GoogleFonts.poppins(),

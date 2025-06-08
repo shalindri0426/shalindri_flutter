@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:luxe_living/screens/category_screen.dart';
 // import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/login_screen.dart';
+//import 'package:luxe_living/screens/splash_screen.dart';
 // import 'package:luxe_living/screens/main_appscreen.dart';
 // import 'package:luxe_living/screens/placeOrder_screen.dart';
 // import 'package:luxe_living/screens/splash_screen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor: Colors.white,
       colorScheme: const ColorScheme.light(
         primary: Color(0xFF16282A),
-        secondary: Color(0xB364675A), 
+        secondary: Color(0xB364675A),
         onPrimary: Colors.white,
         onSecondary: Colors.black,
       ),
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         bodyLarge: TextStyle(color: Color(0xFF16282A)),
         bodySmall: TextStyle(color: Color(0xFF64675A)),
       ),
-      cardColor: Color(0x3364675A), 
+      cardColor: Color(0x3364675A),
       buttonTheme: const ButtonThemeData(
         buttonColor: Color(0xFF16282A),
         textTheme: ButtonTextTheme.primary,
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData.dark(),
       home: LoginPage(),
 
-      //home:CategoryScreen()
+      //home:SplashScreen()
     );
   }
 }
