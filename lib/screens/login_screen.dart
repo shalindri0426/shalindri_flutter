@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/register_screen.dart';
+import 'package:luxe_living/screens/main_appscreen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const MainAppscreen()),
       );
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Logging in...")));

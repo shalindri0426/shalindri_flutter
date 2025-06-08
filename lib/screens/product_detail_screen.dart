@@ -186,7 +186,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     width: 60,
                                     decoration: BoxDecoration(
                                       color: isSelected
-                                          ? theme.colorScheme.onBackground
+                                          ? theme.colorScheme.onSurface
                                           : theme.colorScheme.background,
                                       border: Border.all(
                                         color: isSelected

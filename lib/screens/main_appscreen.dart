@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/login_screen.dart';
+import 'package:luxe_living/screens/profile_screen.dart';
 
 class MainAppscreen extends StatefulWidget {
   const MainAppscreen({super.key});
@@ -15,7 +16,7 @@ class _MainAppscreenState extends State<MainAppscreen> {
   final List<Widget> pages = [
     const HomeScreen(),
     const Scaffold(body: Center(child: Text('Categories Screen Placeholder'))),
-    const LoginPage(),
+    const ProfileScreen(),
   ];
 
   @override

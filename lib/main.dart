@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:luxe_living/screens/home_screen.dart';
+import 'package:luxe_living/screens/login_screen.dart';
 import 'package:luxe_living/screens/main_appscreen.dart';
 import 'package:luxe_living/screens/placeOrder_screen.dart';
 import 'package:luxe_living/screens/splash_screen.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
 ThemeData _darkTheme() {
   return ThemeData(
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF16282A),
+    primaryColor: const Color.fromARGB(255, 255, 255, 255),
     scaffoldBackgroundColor: const Color(0xFF0D1415),
     colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 255, 255, 255),
@@ -77,9 +78,9 @@ ThemeData _darkTheme() {
       darkTheme: _darkTheme(),
       themeMode: ThemeMode.system,
       // theme: ThemeData.dark(),
-      //home: const SplashScreen(),
+      home: LoginPage(),
       //home:PlaceOrderForm()
-      home: MainAppscreen(),
+      //home: MainAppscreen(),
     );
   }
 }
