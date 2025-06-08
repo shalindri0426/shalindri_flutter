@@ -151,8 +151,61 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
               ),
             ),
+            const SizedBox(height: 10),
 
-            const SizedBox(height: 30),
+            // Section: Recently viewed
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Recently Viewed",
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  Text(
+                    "See all",
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            //Recently viewed products
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: List.generate(luxelivingApp.length, (index) {
+                  final product = luxelivingApp[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ProductDetailScreen(
+                              ProductItem: product,
+                            ),
+                          ),
+                        );
+                      },
+                      child: TrendingProducts(
+                        productItem: product,
+                        size: size,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
           ],
         ),
       ),

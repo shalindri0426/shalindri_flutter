@@ -31,7 +31,6 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
 
   void _placeOrder() {
     if (_formKey.currentState!.validate()) {
-      // Process order logic here (e.g. send order details to backend)
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Order placed successfully!')),
@@ -44,8 +43,13 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final backgroundColor = theme.primaryColor;
+    final textColor = theme.scaffoldBackgroundColor;
+
     return Scaffold(
       appBar: AppBar(
+        foregroundColor:textColor,
         title: const Text('Place Order'),
       ),
       body: Padding(
@@ -140,8 +144,13 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
               const SizedBox(height: 30),
 
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: backgroundColor,
+                  foregroundColor: textColor,
+                ),
                 onPressed: _placeOrder,
                 child: const Text('Place Order'),
+              
               ),
             ],
           ),

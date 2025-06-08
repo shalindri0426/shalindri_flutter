@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:luxe_living/screens/home_screen.dart';
-import 'package:luxe_living/screens/login_screen.dart';
-import 'package:luxe_living/screens/main_appscreen.dart';
-import 'package:luxe_living/screens/placeOrder_screen.dart';
-import 'package:luxe_living/screens/splash_screen.dart';
+//import 'package:luxe_living/screens/category_screen.dart';
+// import 'package:luxe_living/screens/home_screen.dart';
+ import 'package:luxe_living/screens/login_screen.dart';
+// import 'package:luxe_living/screens/main_appscreen.dart';
+// import 'package:luxe_living/screens/placeOrder_screen.dart';
+// import 'package:luxe_living/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,8 +80,8 @@ ThemeData _darkTheme() {
       themeMode: ThemeMode.system,
       // theme: ThemeData.dark(),
       home: LoginPage(),
-      //home:PlaceOrderForm()
-      //home: MainAppscreen(),
+      //home:CategoryScreen()
+      
     );
   }
 }

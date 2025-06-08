@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/screens/placeOrder_screen.dart';
 

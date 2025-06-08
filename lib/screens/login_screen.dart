@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luxe_living/screens/home_screen.dart';
+//import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/register_screen.dart';
 import 'package:luxe_living/screens/main_appscreen.dart';
 
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     final primaryColor = theme.colorScheme.primary;
     final onPrimaryColor = theme.colorScheme.onPrimary;
     final secondaryColor = theme.colorScheme.secondary;
-    final onSecondaryColor = theme.colorScheme.onSecondary;
+    //final onSecondaryColor = theme.colorScheme.onSecondary;
     final scaffoldBackground = theme.scaffoldBackgroundColor;
 
     return Scaffold(

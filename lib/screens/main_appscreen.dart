@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:luxe_living/screens/cart_screen.dart';
+import 'package:luxe_living/screens/category_screen.dart';
 import 'package:luxe_living/screens/home_screen.dart';
-import 'package:luxe_living/screens/login_screen.dart';
 import 'package:luxe_living/screens/profile_screen.dart';
 
 class MainAppscreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainAppscreenState extends State<MainAppscreen> {
 
   final List<Widget> pages = [
     const HomeScreen(),
-    const Scaffold(body: Center(child: Text('Categories Screen Placeholder'))),
+    const CategoryScreen(),
     const ProfileScreen(),
   ];
 
@@ -30,10 +31,11 @@ class _MainAppscreenState extends State<MainAppscreen> {
         backgroundColor: theme.appBarTheme.backgroundColor,
         elevation: 0,
         title: Image.asset(
-          Theme.of(context).brightness ==Brightness.dark
-          ? "assets/images/logo.png"
-          : "assets/images/logoWhite.png", 
-          height: 50),
+          Theme.of(context).brightness == Brightness.dark
+              ? "assets/images/logo.png"
+              : "assets/images/logoWhite.png",
+          height: 50,
+        ),
         actions: [
           Stack(
             clipBehavior: Clip.none,
@@ -41,6 +43,10 @@ class _MainAppscreenState extends State<MainAppscreen> {
               IconButton(
                 icon: Icon(Icons.shopping_cart, color: colorScheme.onPrimary),
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => (CartScreen())),
+                  );
                   // Add cart navigation logic here
                 },
               ),
@@ -81,7 +87,10 @@ class _MainAppscreenState extends State<MainAppscreen> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Categories'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Categories',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
