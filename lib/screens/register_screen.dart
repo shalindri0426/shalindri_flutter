@@ -17,12 +17,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _register() {
     if (_formKey.currentState!.validate()) {
-      // Simulate successful registration
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Registration Successful!')),
       );
 
-      // Navigate to login page
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -41,46 +39,84 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+    final onPrimaryColor = theme.colorScheme.onPrimary;
+    final secondaryColor = theme.colorScheme.secondary;
+    final scaffoldBackground = theme.scaffoldBackgroundColor;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: Padding(
+      appBar: AppBar(
+        title: const Text('Register'),
+        backgroundColor: primaryColor,
+        foregroundColor: onPrimaryColor,
+        elevation: 0,
+      ),
+      backgroundColor: scaffoldBackground,
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
+              _buildTextField(
                 controller: _usernameController,
-                decoration: const InputDecoration(labelText: 'Username'),
+                label: 'Username',
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Enter a username' : null,
+                theme: theme,
+                secondaryColor: secondaryColor,
+                
               ),
-              TextFormField(
+              const SizedBox(height: 15),
+              _buildTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                label: 'Email',
                 validator: (value) =>
                     value == null || !value.contains('@') ? 'Enter a valid email' : null,
+                theme: theme,
+                secondaryColor: secondaryColor,
               ),
-              TextFormField(
+              const SizedBox(height: 15),
+              _buildTextField(
                 controller: _passwordController,
+                label: 'Password',
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Password'),
                 validator: (value) =>
                     value == null || value.length < 6 ? 'Min 6 characters' : null,
+                theme: theme,
+                secondaryColor: secondaryColor,
               ),
-              TextFormField(
+              const SizedBox(height: 15),
+              _buildTextField(
                 controller: _confirmPasswordController,
+                label: 'Confirm Password',
                 obscureText: true,
-                decoration: const InputDecoration(labelText: 'Confirm Password'),
                 validator: (value) =>
                     value != _passwordController.text ? 'Passwords do not match' : null,
+                theme: theme,
+                secondaryColor: secondaryColor,
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _register,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: primaryColor,
+                    foregroundColor: onPrimaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _register,
-                child: const Text('Register'),
-              ),
-              const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -88,12 +124,40 @@ class _RegisterPageState extends State<RegisterPage> {
                     MaterialPageRoute(builder: (_) => const LoginPage()),
                   );
                 },
-                child: const Text('Already have an account? Login'),
+                child: Text(
+                  'Already have an account? Login',
+                  style: TextStyle(color: secondaryColor),
+                ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    bool obscureText = false,
+    required String? Function(String?) validator,
+    required ThemeData theme,
+    required Color secondaryColor,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: secondaryColor),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        filled: true,
+        fillColor: theme.cardColor.withOpacity(0.15),
+      ),
+      style: TextStyle(color:theme.colorScheme.primary ),
+      validator: validator,
     );
   }
 }
