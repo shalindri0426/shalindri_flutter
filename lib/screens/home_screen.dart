@@ -46,9 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style:GoogleFonts.poppins(
-                      color: colorScheme.secondary,
-                    ),
+                    style: GoogleFonts.poppins(color: colorScheme.secondary),
                   ),
                 ],
               ),
@@ -63,16 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   final currentCategory = category[index];
                   return InkWell(
                     onTap: () {
-                      final filtered = luxelivingApp.where((item) =>
-                        item.category.toLowerCase() == currentCategory.name.toLowerCase()).toList();
+                      final filtered =
+                          luxelivingApp
+                              .where(
+                                (item) =>
+                                    item.category.toLowerCase() ==
+                                    currentCategory.name.toLowerCase(),
+                              )
+                              .toList();
 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => CategoryProducts(
-                            category: currentCategory.name,
-                            categoryProducts: filtered,
-                          ),
+                          builder:
+                              (_) => CategoryProducts(
+                                category: currentCategory.name,
+                                categoryProducts: filtered,
+                              ),
                         ),
                       );
                     },
@@ -115,9 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style: GoogleFonts.poppins(
-                      color: colorScheme.secondary,
-                    ),
+                    style: GoogleFonts.poppins(color: colorScheme.secondary),
                   ),
                 ],
               ),
@@ -137,16 +140,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ProductDetailScreen(
-                              ProductItem: product,
-                            ),
+                            builder:
+                                (_) =>
+                                    ProductDetailScreen(ProductItem: product),
                           ),
                         );
                       },
-                      child: TrendingProducts(
-                        productItem: product,
-                        size: size,
-                      ),
+                      child: TrendingProducts(productItem: product, size: size),
                     ),
                   );
                 }),
@@ -170,9 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "See all",
-                    style: GoogleFonts.poppins(
-                      color: colorScheme.secondary,
-                    ),
+                    style: GoogleFonts.poppins(color: colorScheme.secondary),
                   ),
                 ],
               ),
@@ -192,16 +190,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ProductDetailScreen(
-                              ProductItem: product,
-                            ),
+                            builder:
+                                (_) =>
+                                    ProductDetailScreen(ProductItem: product),
                           ),
                         );
                       },
-                      child: TrendingProducts(
-                        productItem: product,
-                        size: size,
-                      ),
+                      child: TrendingProducts(productItem: product, size: size),
                     ),
                   );
                 }),

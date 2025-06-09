@@ -5,19 +5,25 @@ import 'package:luxe_living/screens/home_screen.dart';
 import 'package:luxe_living/screens/profile_screen.dart';
 
 class MainAppscreen extends StatefulWidget {
+  //UI will chnage based on user interaction - botton nav bar selection
   const MainAppscreen({super.key});
 
   @override
+  //creates the mutable state
   State<MainAppscreen> createState() => _MainAppscreenState();
 }
 
 class _MainAppscreenState extends State<MainAppscreen> {
+  //tracks which bottom nav item is selected (0=home, 1= category, 2= profile)
   int selectedIndex = 0;
 
   final List<Widget> pages = [
+    //screens that are linked to the bottom navigation
     const HomeScreen(),
     const CategoryScreen(),
+    const Text("my wishlist"),
     const ProfileScreen(),
+    
   ];
 
   @override
@@ -90,6 +96,10 @@ class _MainAppscreenState extends State<MainAppscreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: "Wishlist",
           ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
