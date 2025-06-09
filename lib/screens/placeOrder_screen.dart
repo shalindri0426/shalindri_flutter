@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
 
 class PlaceOrderForm extends StatefulWidget {
+  //UI updates needed - form validation
   const PlaceOrderForm({super.key});
 
   @override
+  //connects widget to its mutable state
   State<PlaceOrderForm> createState() => _PlaceOrderFormState();
 }
 
+//manages form logic, input states, submissions
 class _PlaceOrderFormState extends State<PlaceOrderForm> {
+  //tracks form state for validation
   final _formKey = GlobalKey<FormState>();
 
-
+  //each controller holds annd manages the inputs of each field - reads the content of 'TextFormField'
+  //can get, set ,clear whats typed
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController productController = TextEditingController();
-  final TextEditingController quantityController = TextEditingController(text: '1');
+  final TextEditingController quantityController = TextEditingController(
+    text: '1',
+  ); //pe filled with default value '1'
 
   @override
+  //this method is called when the screen is closed
+  //clears memory when the widget is removed from the UI
   void dispose() {
     nameController.dispose();
     emailController.dispose();
@@ -29,14 +38,18 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
     super.dispose();
   }
 
+  //runs when the user clicks the Place Order button
+  //Validating the fields
   void _placeOrder() {
+    //check if valid
     if (_formKey.currentState!.validate()) {
-
+      //runs all the field validators
       ScaffoldMessenger.of(context).showSnackBar(
+        //a popupmsg at the bottom
         const SnackBar(content: Text('Order placed successfully!')),
       );
 
-      // Optionally clear the form
+      // clear the form fields
       _formKey.currentState!.reset();
     }
   }
@@ -49,14 +62,16 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
 
     return Scaffold(
       appBar: AppBar(
-        foregroundColor:textColor,
+        foregroundColor: textColor,
         title: const Text('Place Order'),
       ),
+      //form layout
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
+            //allows scrolling if content exceeds the screen height
             children: [
               // Name
               TextFormField(
@@ -65,8 +80,11 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Please enter your name' : null,
+                validator:
+                    (value) => //checks if not empty
+                        value == null || value.isEmpty
+                            ? 'Please enter your name'
+                            : null,
               ),
               const SizedBox(height: 16),
 
@@ -79,8 +97,12 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Please enter your email';
-                  if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                  if (value == null || value.isEmpty)
+                    return 'Please enter your email';
+                  if (!RegExp(
+                    r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$',
+                  ).hasMatch(value)) {
+                    //this pattern is used to check if an emailis valid
                     return 'Please enter a valid email';
                   }
                   return null;
@@ -96,8 +118,11 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.phone,
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Please enter your phone number' : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Please enter your phone number'
+                            : null,
               ),
               const SizedBox(height: 16),
 
@@ -109,8 +134,11 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 2,
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Please enter your address' : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Please enter your address'
+                            : null,
               ),
               const SizedBox(height: 16),
 
@@ -121,8 +149,11 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Product Name',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Please enter the product name' : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Please enter the product name'
+                            : null,
               ),
               const SizedBox(height: 16),
 
@@ -135,22 +166,24 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Please enter quantity';
+                  if (value == null || value.isEmpty)
+                    return 'Please enter quantity';
                   final qty = int.tryParse(value);
-                  if (qty == null || qty <= 0) return 'Quantity must be greater than 0';
+                  if (qty == null || qty <= 0)
+                    return 'Quantity must be greater than 0';
                   return null;
                 },
               ),
               const SizedBox(height: 30),
-
+              //place order button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: backgroundColor,
                   foregroundColor: textColor,
                 ),
+                //when the button is clicked, '_placeOrder()' is called to validate and show success message
                 onPressed: _placeOrder,
                 child: const Text('Place Order'),
-              
               ),
             ],
           ),

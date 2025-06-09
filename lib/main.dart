@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         elevation: 0,
       ),
       textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: Colors.white),
+        bodyLarge: TextStyle(color: Color(0xFF16282A)),
         bodySmall: TextStyle(color: Color(0xFFB0B3A5)),
       ),
       cardColor: Color(0xB364675A),
@@ -91,8 +91,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false, //hides the debug tag
       // theme: ThemeData.dark(),
-      home: LoginPage(),
-      //home:MainAppscreen()
+      //home: LoginPage(),
+      home:MainAppscreen()
     );
   }
 }

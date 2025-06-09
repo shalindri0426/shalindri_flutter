@@ -23,40 +23,45 @@ class _MainAppscreenState extends State<MainAppscreen> {
     const CategoryScreen(),
     const Text("my wishlist"),
     const ProfileScreen(),
-    
   ];
 
   @override
   Widget build(BuildContext context) {
+    //gets the themedata and currect colourscheme according to thelight/drk mode
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
+      //is the bsic layout of the screen
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
-        elevation: 0,
+        elevation: 0, //gives a flat appearance
         title: Image.asset(
+          //logo changes accoring tothe theme
           Theme.of(context).brightness == Brightness.dark
               ? "assets/images/logo.png"
               : "assets/images/logoWhite.png",
           height: 50,
         ),
+        //cart icon
         actions: [
           Stack(
-            clipBehavior: Clip.none,
+            clipBehavior:
+                Clip.none, //allows to overflow outside the stack without being cut
             children: [
               IconButton(
                 icon: Icon(Icons.shopping_cart, color: colorScheme.onPrimary),
                 onPressed: () {
                   Navigator.push(
+                    //moves to the cart screen page
                     context,
                     MaterialPageRoute(builder: (context) => (CartScreen())),
                   );
-                  // Add cart navigation logic here
                 },
               ),
               Positioned(
+                //places the no. of products in the top right corner
                 right: 3,
                 top: -5,
                 child: Container(
@@ -79,19 +84,22 @@ class _MainAppscreenState extends State<MainAppscreen> {
           ),
         ],
       ),
-      body: pages[selectedIndex],
+      body:
+          pages[selectedIndex], //displays the screen corresponding to the selected index/tab
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+        currentIndex: selectedIndex, //tracks the active screen
         onTap: (index) {
+          //triggers setstate() to udatethe UI
           setState(() {
             selectedIndex = index;
           });
         },
-        elevation: 0,
+        elevation: 0, //no shadow under nav bar
         selectedItemColor: colorScheme.primary,
         unselectedItemColor: colorScheme.secondary,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.fixed, //nav bar is fixed
         items: const [
+          //nav bar icons with labels
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
