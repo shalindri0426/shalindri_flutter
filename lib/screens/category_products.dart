@@ -3,12 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/models/category_model.dart';
 import 'package:luxe_living/models/subcategory_model.dart';
+import 'package:luxe_living/screens/product_detail_screen.dart';
 
 class CategoryProducts extends StatelessWidget {
   final String category;
-  final List<ProductModel> categoryProducts;
+  final List<ProductModel> categoryProducts; //list filtered by category
 
   const CategoryProducts({
+    //constructor with category and matching category products
     super.key,
     required this.category,
     required this.categoryProducts,
@@ -16,7 +18,7 @@ class CategoryProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size; //responsiveness
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -35,13 +37,18 @@ class CategoryProducts extends StatelessWidget {
         backgroundColor: theme.appBarTheme.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: colorScheme.onPrimary),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: colorScheme.onPrimary,
+          ), //back arrow returns to the previous screen
           onPressed: () => Navigator.pop(context),
         ),
       ),
-  
+
       body: SafeArea(
+        //ensures no overlays
         child: Column(
+          //to vertically stack products
           children: [
             SizedBox(height: 10),
             // Search Bar
@@ -52,7 +59,8 @@ class CategoryProducts extends StatelessWidget {
                 child: TextField(
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(5),
-                    hintText: "$category Furnitures",
+                    hintText:
+                        "$category Furnitures", //the main category will be displayed as the hint text inside the search bar
                     hintStyle: theme.textTheme.bodySmall,
                     filled: true,
                     fillColor: theme.cardColor,
@@ -70,7 +78,8 @@ class CategoryProducts extends StatelessWidget {
             ),
             //space between filter bar and search
             const SizedBox(height: 15),
-            // Filter Bar
+
+            // Filter Bar - horizontal scrollable list
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
@@ -87,7 +96,7 @@ class CategoryProducts extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: colorScheme.onSecondary),
+                          border: Border.all(color: colorScheme.onPrimary),
                         ),
                         child: Row(
                           children: [
@@ -101,7 +110,7 @@ class CategoryProducts extends StatelessWidget {
                                   ? Icons.filter_list
                                   : Icons.keyboard_arrow_down,
                               size: 15,
-                              color: colorScheme.onSecondary,
+                              color: colorScheme.primary,
                             ),
                           ],
                         ),
@@ -124,8 +133,9 @@ class CategoryProducts extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: InkWell(
-                      onTap: () {
-                      },
+                      //inkwell - a widget that gives a visual touch when the user clicks it, gives a feel of a button
+                      //makes any widget react to a tap - with a ripple animation
+                      onTap: () {},
                       child: Chip(
                         label: Text(
                           filteredSubcategories[index].name,
@@ -138,10 +148,12 @@ class CategoryProducts extends StatelessWidget {
                 },
               ),
             ),
-             SizedBox(height: 10),
+            SizedBox(height: 10),
+
             // Products Grid
             Expanded(
               child:
+                  //if that category has no products, shows a msg
                   categoryProducts.isEmpty
                       ? Center(
                         child: Text(
@@ -152,26 +164,43 @@ class CategoryProducts extends StatelessWidget {
                           ),
                         ),
                       )
+                      //if products exists, the products will be displayed
                       : GridView.builder(
                         itemCount: categoryProducts.length,
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 5,
-                              childAspectRatio: 0.65,
+                              crossAxisCount: 2, //2 items in a row
+                              crossAxisSpacing: 5, //horizontal spacing
+                              mainAxisSpacing: 5,  //vertical spcaing
+                              childAspectRatio: 0.65, //controls width to hright ratio
                             ),
+
                         itemBuilder: (context, index) {
-                          final productItem = categoryProducts[index];
+                          final productItem = categoryProducts[index]; //retreives the selected category index's products
                           return GestureDetector(
+                            //navigates to product detail screen
                             onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (_) => ProductDetailScreen(
+                                        ProductItem: productItem,
+                                      ),
+                                ),
+                              );
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(12, 0, 12, 2),
+                                  margin: const EdgeInsets.fromLTRB(
+                                    12,
+                                    0,
+                                    12,
+                                    2,
+                                  ),
                                   height: size.height * 0.25,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -188,7 +217,8 @@ class CategoryProducts extends StatelessWidget {
                                       padding: const EdgeInsets.all(8),
                                       child: CircleAvatar(
                                         radius: 16,
-                                        backgroundColor: colorScheme.primary.withOpacity(0.7),
+                                        backgroundColor: colorScheme.primary
+                                            .withOpacity(0.7),
                                         child: const Icon(
                                           Icons.favorite_border,
                                           color: Colors.white,
@@ -200,10 +230,15 @@ class CategoryProducts extends StatelessWidget {
                                 ),
                                 //const SizedBox(height: 0),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 2),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    12,
+                                    0,
+                                    0,
+                                    2,
+                                  ),
                                   child: Text(
                                     productItem.name,
-                                    maxLines: 1,
+                                    maxLines: 1, //max 1 line
                                     overflow: TextOverflow.ellipsis,
                                     style: theme.textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.bold,
@@ -211,7 +246,12 @@ class CategoryProducts extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 2),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    12,
+                                    0,
+                                    0,
+                                    2,
+                                  ),
                                   child: Text(
                                     "LKR ${productItem.price.toString()}",
                                     style: GoogleFonts.poppins(
@@ -219,11 +259,17 @@ class CategoryProducts extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                if (productItem.ischeck == true)
+                                if (productItem.ischeck ==
+                                    true) //check products with discounts
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(12, 0, 0, 2),
+                                    padding: const EdgeInsets.fromLTRB(
+                                      12,
+                                      0,
+                                      0,
+                                      2,
+                                    ),
                                     child: Text(
-                                      "LKR ${productItem.price + 200}.00",
+                                      "LKR ${productItem.price + 200}.00", //adds 200 for the discounted products
                                       style: GoogleFonts.poppins(
                                         color: Colors.pink,
                                         fontSize: 12,

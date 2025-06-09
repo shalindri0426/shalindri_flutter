@@ -14,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: SingleChildScrollView( //scrollable for smallscreens
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // Menu Items
+              // Menu Items - calls a custom widget method thta builds each row item 
               _buildMenuItem(Icons.person_outline, "Update Profile", textColor, backgroundColor, borderColor),
               _buildMenuItem(Icons.history, "Order History", textColor, backgroundColor, borderColor),
               _buildMenuItem(Icons.favorite_border, "My Wishlist", textColor, backgroundColor, borderColor),
@@ -58,10 +58,10 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
+  //this is the method
   Widget _buildMenuItem(IconData icon, String title, Color textColor, Color bgColor, Color? borderColor) {
     return Container(
-      width: double.infinity,
+      width: double.infinity, //full width
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       decoration: BoxDecoration(
