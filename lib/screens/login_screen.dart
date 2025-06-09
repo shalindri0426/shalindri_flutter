@@ -5,25 +5,30 @@ import 'package:luxe_living/screens/register_screen.dart';
 import 'package:luxe_living/screens/main_appscreen.dart';
 
 class LoginPage extends StatefulWidget {
+  //stateful - form validation requires changes in the UI
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
+//Connects to its internal state class
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //for validation
+  //to read inputs from user
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void _login() {
+    //login validation
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainAppscreen()),
       );
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Logging in...")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Logging in...")));
     }
   }
 
@@ -42,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Form(
-            key: _formKey,
+            key: _formKey, //starts form with validation
             child: Column(
+              //to stack child widgets vertically
               children: [
-                // Logo or Title
                 Text(
                   'LUXE – LIVING',
                   style: GoogleFonts.poppins(
@@ -62,7 +67,10 @@ class _LoginPageState extends State<LoginPage> {
                   controller: emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
-                    prefixIcon: Icon(Icons.email_outlined, color: secondaryColor),
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: secondaryColor,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -70,8 +78,11 @@ class _LoginPageState extends State<LoginPage> {
                     fillColor: theme.cardColor.withOpacity(0.15),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) =>
-                      value != null && value.contains('@') ? null : 'Enter a valid email',
+                  validator:
+                      (value) =>
+                          value != null && value.contains('@')
+                              ? null
+                              : 'Enter a valid email',
                   style: GoogleFonts.poppins(color: primaryColor),
                 ),
                 const SizedBox(height: 20),
@@ -89,17 +100,20 @@ class _LoginPageState extends State<LoginPage> {
                     fillColor: theme.cardColor.withOpacity(0.15),
                   ),
                   obscureText: true,
-                  validator: (value) =>
-                      value != null && value.length >= 6 ? null : 'Password must be 6+ chars',
+                  validator:
+                      (value) =>
+                          value != null && value.length >= 6
+                              ? null
+                              : 'Password must be 6+ chars',
                   style: GoogleFonts.poppins(color: primaryColor),
                 ),
                 const SizedBox(height: 30),
 
                 // Login Button
                 SizedBox(
-                  width: double.infinity,
+                  width: double.infinity, //full width
                   child: ElevatedButton(
-                    onPressed: _login,
+                    onPressed: _login, //calls _login then button is pressed
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       backgroundColor: primaryColor,
@@ -122,7 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const RegisterPage()),
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPage(),
+                      ),
                     );
                   },
                   child: Text(

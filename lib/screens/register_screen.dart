@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login_screen.dart'; // Import your login page
+import 'login_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -10,17 +10,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //validation
+  //reads inputs
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
+  //validation method
   void _register() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registration Successful!')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Registration Successful!')));
 
       Navigator.pushReplacement(
         context,
@@ -29,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  //called when the screen is closed to clear the memory
   @override
   void dispose() {
     _usernameController.dispose();
@@ -39,6 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
+  //builds the UI everytime flutter rebuilds the screen
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
@@ -57,24 +61,31 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Form(
+          //starts a form for validation using _formkey
           key: _formKey,
           child: Column(
             children: [
               _buildTextField(
+                //reuses this method to create a reuseable input
                 controller: _usernameController,
                 label: 'Username',
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter a username' : null,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Enter a username'
+                            : null,
                 theme: theme,
                 secondaryColor: secondaryColor,
-                
               ),
               const SizedBox(height: 15),
               _buildTextField(
                 controller: _emailController,
                 label: 'Email',
-                validator: (value) =>
-                    value == null || !value.contains('@') ? 'Enter a valid email' : null,
+                validator:
+                    (value) =>
+                        value == null || !value.contains('@')
+                            ? 'Enter a valid email'
+                            : null,
                 theme: theme,
                 secondaryColor: secondaryColor,
               ),
@@ -82,9 +93,12 @@ class _RegisterPageState extends State<RegisterPage> {
               _buildTextField(
                 controller: _passwordController,
                 label: 'Password',
-                obscureText: true,
-                validator: (value) =>
-                    value == null || value.length < 6 ? 'Min 6 characters' : null,
+                obscureText: true, //hidden text
+                validator:
+                    (value) =>
+                        value == null || value.length < 6
+                            ? 'Min 6 characters'
+                            : null,
                 theme: theme,
                 secondaryColor: secondaryColor,
               ),
@@ -93,8 +107,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _confirmPasswordController,
                 label: 'Confirm Password',
                 obscureText: true,
-                validator: (value) =>
-                    value != _passwordController.text ? 'Passwords do not match' : null,
+                validator: //password should match
+                    (value) =>
+                        value != _passwordController.text
+                            ? 'Passwords do not match'
+                            : null,
                 theme: theme,
                 secondaryColor: secondaryColor,
               ),
@@ -102,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _register,
+                  onPressed: _register, //calls this function on tap
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     backgroundColor: primaryColor,
@@ -121,6 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(
+                    //to remove the registerscreen from the back stack
                     context,
                     MaterialPageRoute(builder: (_) => const LoginPage()),
                   );
@@ -137,8 +155,10 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  //method - reuseable widget builds form fields
+  //creates a form instead of writing the full TextFormField multiple times for each input field
   Widget _buildTextField({
-    required TextEditingController controller,
+    required TextEditingController controller, //manages inputs
     required String label,
     bool obscureText = false,
     required String? Function(String?) validator,
@@ -151,13 +171,11 @@ class _RegisterPageState extends State<RegisterPage> {
       decoration: InputDecoration(
         labelText: label,
         labelStyle: GoogleFonts.poppins(color: secondaryColor),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         filled: true,
         fillColor: theme.cardColor.withOpacity(0.15),
       ),
-      style: GoogleFonts.poppins(color:theme.colorScheme.primary ),
+      style: GoogleFonts.poppins(color: theme.colorScheme.primary),
       validator: validator,
     );
   }

@@ -5,7 +5,7 @@ import 'package:luxe_living/models/product_model.dart';
 import 'package:luxe_living/screens/placeOrder_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  final ProductModel ProductItem;
+  final ProductModel ProductItem; //passes the product model
   const ProductDetailScreen({super.key, required this.ProductItem});
 
   @override
@@ -27,10 +27,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         centerTitle: true,
         backgroundColor: theme.primaryColor,
         foregroundColor: theme.colorScheme.background,
-        title: Text(
-          "Product Detail",
-          style: GoogleFonts.poppins(),
-        ),
+        title: Text("Product Detail", style: GoogleFonts.poppins()),
         actions: [
           Stack(
             clipBehavior: Clip.none,
@@ -47,10 +44,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   child: const Text(
                     "3",
-                    style:TextStyle(
-                      color: Colors.white, 
+                    style: TextStyle(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      ),
+                    ),
                   ),
                 ),
               ),
@@ -90,9 +87,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 7,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: index == currentIndex
-                                ? theme.colorScheme.primary
-                                : Colors.grey,
+                            color:
+                                index == currentIndex
+                                    ? theme.colorScheme.primary
+                                    : Colors.grey,
                           ),
                         ),
                       ),
@@ -109,16 +107,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               children: [
                 Text(
                   widget.ProductItem.name,
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   "LKR ${widget.ProductItem.price}",
-                  style: GoogleFonts.poppins(color: theme.colorScheme.secondary),
+                  style: GoogleFonts.poppins(
+                    color: theme.colorScheme.secondary,
+                  ),
                 ),
                 if (widget.ProductItem.ischeck == true)
                   Text(
                     "LKR ${widget.ProductItem.price + 200}.00",
-                    style:  GoogleFonts.poppins(
+                    style: GoogleFonts.poppins(
                       color: Colors.pink,
                       fontSize: 12,
                       decoration: TextDecoration.lineThrough,
@@ -145,23 +147,43 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: widget.ProductItem.pcolor.asMap().entries.map((entry) {
-                                final int index = entry.key;
-                                final color = entry.value;
-                                return GestureDetector(
-                                  onTap: () => setState(() => selectedColorIndex = index),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: CircleAvatar(
-                                      radius: 18,
-                                      backgroundColor: color,
-                                      child: selectedColorIndex == index
-                                          ? const Icon(Icons.check, color: Colors.white, size: 18)
-                                          : null,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                              children:
+                                  widget
+                                      .ProductItem
+                                      .pcolor //a list of colours
+                                      .asMap() //converts the list into a map - index:value
+                                      .entries //returns iterable of  MapEntry <int,colour>
+                                      .map((entry) {
+                                        //loop over each entry
+                                        final int index = entry.key; //index
+                                        final color =
+                                            entry.value; //color at the index
+                                        return GestureDetector(
+                                          onTap:
+                                              () => setState(
+                                                () =>
+                                                    selectedColorIndex = index,
+                                              ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 10,
+                                            ),
+                                            child: CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: color,
+                                              child:
+                                                  selectedColorIndex == index
+                                                      ? const Icon(
+                                                        Icons.check,
+                                                        color: Colors.white,
+                                                        size: 18,
+                                                      )
+                                                      : null,
+                                            ),
+                                          ),
+                                        );
+                                      })
+                                      .toList(),
                             ),
                           ),
                         ],
@@ -179,43 +201,68 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: widget.ProductItem.material.asMap().entries.map((entry) {
-                                final int index = entry.key;
-                                final material = entry.value;
-                                final isSelected = selectedSizeIndex == index;
-                                return GestureDetector(
-                                  onTap: () => setState(() => selectedSizeIndex = index),
-                                  child: Container(
-                                    margin: const EdgeInsets.only(right: 10),
-                                    height: 35,
-                                    width: 60,
-                                    decoration: BoxDecoration(
-                                      color: isSelected
-                                          ? theme.colorScheme.onSurface
-                                          : theme.colorScheme.background,
-                                      border: Border.all(
-                                        color: isSelected
-                                            ? theme.colorScheme.onBackground
-                                            : Colors.grey,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        material,
-                                        style: GoogleFonts.poppins(
-                                          color: isSelected
-                                              ? theme.colorScheme.background
-                                              : theme.colorScheme.onBackground,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                              children:
+                                  widget.ProductItem.material
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                        final int index = entry.key;
+                                        final material = entry.value;
+                                        final isSelected =
+                                            selectedSizeIndex == index;
+                                        return GestureDetector(
+                                          onTap:
+                                              () => setState(
+                                                () => selectedSizeIndex = index,
+                                              ),
+                                          child: Container(
+                                            margin: const EdgeInsets.only(
+                                              right: 10,
+                                            ),
+                                            height: 35,
+                                            width: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  isSelected
+                                                      ? theme
+                                                          .colorScheme
+                                                          .onSurface
+                                                      : theme
+                                                          .colorScheme
+                                                          .background,
+                                              border: Border.all(
+                                                color:
+                                                    isSelected
+                                                        ? theme
+                                                            .colorScheme
+                                                            .onBackground
+                                                        : Colors.grey,
+                                                width: 2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                material,
+                                                style: GoogleFonts.poppins(
+                                                  color:
+                                                      isSelected
+                                                          ? theme
+                                                              .colorScheme
+                                                              .background
+                                                          : theme
+                                                              .colorScheme
+                                                              .onBackground,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      })
+                                      .toList(),
                             ),
                           ),
                         ],
@@ -231,63 +278,71 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
       // Bottom Buttons
       bottomNavigationBar: Padding(
-  padding: const EdgeInsets.fromLTRB(18, 0, 18, 20),
-  child: Row(
-    children: [
-      Expanded(
-        child: ElevatedButton.icon(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Item added to cart!"),
-                duration: Duration(seconds: 2),
-                backgroundColor: Colors.greenAccent,
+        padding: const EdgeInsets.fromLTRB(18, 0, 18, 20),
+        child: Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Item added to cart!"),
+                      duration: Duration(seconds: 2),
+                      backgroundColor: Colors.greenAccent,
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: theme.colorScheme.onBackground,
+                ),
+                label: Text(
+                  "ADD TO CART",
+                  style: GoogleFonts.poppins(
+                    color: theme.colorScheme.onBackground,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.colorScheme.background,
+                  elevation: 0,
+                  side: BorderSide(color: theme.colorScheme.onBackground),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
               ),
-            );
-          },
-          icon: Icon(Icons.shopping_cart, color: theme.colorScheme.onBackground),
-          label: Text(
-            "ADD TO CART",
-            style: GoogleFonts.poppins(
-              color: theme.colorScheme.onBackground,
             ),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: theme.colorScheme.background,
-            elevation: 0,
-            side: BorderSide(color: theme.colorScheme.onBackground),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PlaceOrderForm(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.colorScheme.onBackground,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                child: Text(
+                  "BUY NOW",
+                  style: GoogleFonts.poppins(
+                    color: theme.colorScheme.background,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      const SizedBox(width: 10),
-      Expanded(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PlaceOrderForm()),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: theme.colorScheme.onBackground,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          ),
-          child: Text(
-            "BUY NOW",
-            style: GoogleFonts.poppins(
-              color: theme.colorScheme.background,
-              letterSpacing: 1,
-            ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-
     );
   }
 }
