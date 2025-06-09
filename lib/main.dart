@@ -91,8 +91,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false, //hides the debug tag
       // theme: ThemeData.dark(),
-      //home: LoginPage(),
-      home:MainAppscreen()
+      home: LoginPage(),
+      //home:MainAppscreen()
     );
   }
 }
