@@ -80,6 +80,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 validator:
                     (value) => //checks if not empty
                         value == null || value.isEmpty
@@ -95,6 +96,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Email Address',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty)
@@ -117,6 +119,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 keyboardType: TextInputType.phone,
                 validator:
                     (value) =>
@@ -133,6 +136,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Shipping Address',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 maxLines: 2,
                 validator:
                     (value) =>
@@ -149,6 +153,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Product Name',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 validator:
                     (value) =>
                         value == null || value.isEmpty
@@ -164,6 +169,7 @@ class _PlaceOrderFormState extends State<PlaceOrderForm> {
                   labelText: 'Quantity',
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: backgroundColor),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty)
